@@ -1,0 +1,88 @@
+{% extends "base.html" %} {% block title %}HR - Employee Management{% endblock
+%} {% block content %}
+<h1>Human Resource Management</h1>
+
+<!-- Employee Form -->
+<div class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title">Add New Employee</h5>
+    <form action="{{ url_for('views.add_employee') }}" method="POST">
+      <div class="mb-3">
+        <input
+          type="text"
+          name="employee_name"
+          class="form-control"
+          placeholder="Employee Name"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <input
+          type="text"
+          name="role"
+          class="form-control"
+          placeholder="Role"
+        />
+      </div>
+      <div class="mb-3">
+        <input
+          type="Integer"
+          name="project_number"
+          class="form-control"
+          placeholder="Project Number"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Add Employee</button>
+    </form>
+  </div>
+</div>
+
+<!-- Employee List -->
+<h2>Current Employees</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Role</th>
+      <th>Current Project</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for employee in employees %}
+    <tr>
+      <td>{{ employee.employee_no }}</td>
+      <td>{{ employee.employee_name }}</td>
+      <td>{{ employee.role }}</td>
+      <td>{{ employee.project_number }}</td>
+      <td>
+        <!-- Edit Button -->
+        <a
+          href="{{ url_for('views.edit_employee', employee_no=employee.employee_no) }}"
+          class="btn btn-sm btn-warning"
+          >Edit</a
+        >
+
+        <!-- Delete Button -->
+        <form
+          action="{{ url_for('views.delete_employee', employee_no=employee.employee_no) }}"
+          method="POST"
+          style="display: inline"
+        >
+          <button
+            type="submit"
+            class="btn btn-sm btn-danger"
+            onclick="return confirm('Are you sure you want to delete {{ employee.employee_name }}?')"
+          >
+            Delete
+          </button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+
+<!-- This is the page where HR manages employees like adding editing or deleting (CRUD!). maintains communicationwith Flask routes (adding,editing, deleting employee) -->

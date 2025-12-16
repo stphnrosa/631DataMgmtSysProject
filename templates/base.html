@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Company Portal{% endblock %}</title> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{{ url_for('views.home') }}">Home</a>
+    <a class="navbar-brand" href="{{ url_for('views.hr') }}">HR</a>
+    <a class="navbar-brand" href="{{ url_for('views.projects_page') }}">Projects</a>
+</nav>
+
+<div class="container mt-4">
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>
+
+<!-- I used Bootstrap for styling my Web applications, -->
+ <!--  block title   lets each page have its own title-->

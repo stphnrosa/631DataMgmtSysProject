@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+<!-- ^ using the layour from base.html, nav bar and boostrap styling are automatically included -->
+{% block title %}Project Management{% endblock %}
+
+{% block content %}
+    <h1>Edit Employee Content</h1>
+<!-- Edit Employee Form -->
+<div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title">Edit Employee Information</h5>
+      <form action="{{ url_for('views.edit_employee', employee_no=employee.employee_no) }}" method="POST">
+        <div class="mb-3">
+          <input
+            type="text"
+            name="employee_name"
+            class="form-control"
+            placeholder= "Add Name"
+            value="{{ employee.employee_name }}"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <input
+            type="text"
+            name="role"
+            class="form-control"
+            placeholder="Role"
+            value = "{{ employee.role }}"
+         />
+         </div>
+          <div class="mb-3">
+            <input
+              type="Integer"
+              name="project_number"
+              class="form-control"
+              placeholder="Project Number"
+              value = "{{ employee.project_number }}"
+            />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+
+
+    {% endblock %}
